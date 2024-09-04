@@ -2,6 +2,7 @@
   "name": "treemap-squarify",
   "version": "1.0.1",
   "description": "Calculates the treemap coordinates following the squarify algorithm",
+  "type": "module",
   "author": "Clément Bataille",
   "license": "ISC",
   "repository": "https://github.com/clementbat/treemap.git",

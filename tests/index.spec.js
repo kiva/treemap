@@ -1,9 +1,9 @@
-const assert = require('assert');
-const { getTreemap } = require('../src');
+import assert from 'assert';
+import { getTreemap } from '../src/index.js';
 
 describe('treemap-squarify module', function () {
-  describe('getTreemap main function', function () {
-    it('should return an error if malformed height argument', function () {
+  describe('getTreemap main function', () => {
+    it('should return an error if malformed height argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -13,7 +13,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You need to specify the height of your treemap'));
     });
 
-    it('should return an error if malformed height argument', function () {
+    it('should return an error if malformed height argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -24,7 +24,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You need to specify the height of your treemap'));
     });
 
-    it('should return an error if malformed width argument', function () {
+    it('should return an error if malformed width argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -34,7 +34,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You need to specify the width of your treemap'));
     });
 
-    it('should return an error if malformed width argument', function () {
+    it('should return an error if malformed width argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -45,7 +45,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You need to specify the width of your treemap'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -57,7 +57,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -69,7 +69,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         data: [
           { value: 10 },
@@ -81,7 +81,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         data: '[{ value: 10 }]',
         width: 700,
@@ -90,7 +90,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         width: 700,
         height: 600,
@@ -98,7 +98,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return an error if malformed data argument', function () {
+    it('should return an error if malformed data argument', () => {
       const shouldThrow = () => getTreemap({
         data: [],
         width: 700,
@@ -107,7 +107,7 @@ describe('treemap-squarify module', function () {
       assert.throws(shouldThrow, Error('You data must be in this format [{ value: 1 }, { value: 2 }], \'value\' being a positive number'));
     });
 
-    it('should return the result expected', function () {
+    it('should return the result expected', () => {
       const result = [
         {
           x: 0,
@@ -166,9 +166,10 @@ describe('treemap-squarify module', function () {
       }), result);
     });
 
-    it('should return the result expected', function () {
+    it('should return the result expected', () => {
       const result = [
-        { x: 0,
+        {
+          x: 0,
           y: 0,
           width: 296.97,
           height: 257.14,
@@ -208,7 +209,7 @@ describe('treemap-squarify module', function () {
           width: 44.78,
           height: 284.21,
           data: { value: 1 },
-        }
+        },
       ];
       assert.deepEqual(getTreemap({
         data: [
@@ -224,7 +225,7 @@ describe('treemap-squarify module', function () {
       }), result);
     });
 
-    it('should return the result with one data point', function () {
+    it('should return the result with one data point', () => {
       const result = [
         {
           data: {

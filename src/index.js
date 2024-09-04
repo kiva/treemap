@@ -1,12 +1,16 @@
-const {
+/* eslint-disable import/prefer-default-export */
+import {
   sumReducer,
   getMaximum,
   getMinimum,
   roundValue,
   validateArguments,
-} = require('./helpers');
+} from './helpers/index.js';
 
-exports.getTreemap = function getTreemap({ data, width, height }) {
+export function getTreemap({ data, width, height }) {
+  let Rectangle = {};
+  let initialData = [];
+
   function worstRatio(row, width) {
     const sum = row.reduce(sumReducer, 0);
     const rowMax = getMaximum(row);
@@ -15,10 +19,10 @@ exports.getTreemap = function getTreemap({ data, width, height }) {
   }
 
   const getMinWidth = () => {
-    if (this.Rectangle.totalHeight ** 2 > this.Rectangle.totalWidth ** 2) {
-      return { value: this.Rectangle.totalWidth, vertical: false };
+    if (Rectangle.totalHeight ** 2 > Rectangle.totalWidth ** 2) {
+      return { value: Rectangle.totalWidth, vertical: false };
     }
-    return { value: this.Rectangle.totalHeight, vertical: true };
+    return { value: Rectangle.totalHeight, vertical: true };
   };
 
   const layoutRow = (row, width, vertical) => {
@@ -26,8 +30,8 @@ exports.getTreemap = function getTreemap({ data, width, height }) {
 
     row.forEach((rowItem) => {
       const rowWidth = rowItem / rowHeight;
-      const { xBeginning } = this.Rectangle;
-      const { yBeginning } = this.Rectangle;
+      const { xBeginning } = Rectangle;
+      const { yBeginning } = Rectangle;
 
       let data;
       if (vertical) {
@@ -36,31 +40,31 @@ exports.getTreemap = function getTreemap({ data, width, height }) {
           y: yBeginning,
           width: rowHeight,
           height: rowWidth,
-          data: this.initialData[this.Rectangle.data.length],
+          data: initialData[Rectangle.data.length],
         };
-        this.Rectangle.yBeginning += rowWidth;
+        Rectangle.yBeginning += rowWidth;
       } else {
         data = {
           x: xBeginning,
           y: yBeginning,
           width: rowWidth,
           height: rowHeight,
-          data: this.initialData[this.Rectangle.data.length],
+          data: initialData[Rectangle.data.length],
         };
-        this.Rectangle.xBeginning += rowWidth;
+        Rectangle.xBeginning += rowWidth;
       }
 
-      this.Rectangle.data.push(data);
+      Rectangle.data.push(data);
     });
 
     if (vertical) {
-      this.Rectangle.xBeginning += rowHeight;
-      this.Rectangle.yBeginning -= width;
-      this.Rectangle.totalWidth -= rowHeight;
+      Rectangle.xBeginning += rowHeight;
+      Rectangle.yBeginning -= width;
+      Rectangle.totalWidth -= rowHeight;
     } else {
-      this.Rectangle.xBeginning -= width;
-      this.Rectangle.yBeginning += rowHeight;
-      this.Rectangle.totalHeight -= rowHeight;
+      Rectangle.xBeginning -= width;
+      Rectangle.yBeginning += rowHeight;
+      Rectangle.totalHeight -= rowHeight;
     }
   };
 
@@ -86,23 +90,23 @@ exports.getTreemap = function getTreemap({ data, width, height }) {
   };
 
   validateArguments({ data, width, height });
-  this.Rectangle = {
+  Rectangle = {
     data: [],
     xBeginning: 0,
     yBeginning: 0,
     totalWidth: width,
     totalHeight: height,
   };
-  this.initialData = data;
+  initialData = data;
   const totalValue = data.map((dataPoint) => dataPoint.value).reduce(sumReducer, 0);
   const dataScaled = data.map((dataPoint) => (dataPoint.value * height * width) / totalValue);
 
   squarify(dataScaled, [], getMinWidth().value);
-  return this.Rectangle.data.map((dataPoint) => ({
+  return Rectangle.data.map((dataPoint) => ({
     ...dataPoint,
     x: roundValue(dataPoint.x),
     y: roundValue(dataPoint.y),
     width: roundValue(dataPoint.width),
     height: roundValue(dataPoint.height),
   }));
-};
+}

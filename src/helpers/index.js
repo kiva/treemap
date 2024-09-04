@@ -1,12 +1,12 @@
-exports.getMaximum = (array) => Math.max(...array);
+export const getMaximum = (array) => Math.max(...array);
 
-exports.getMinimum = (array) => Math.min(...array);
+export const getMinimum = (array) => Math.min(...array);
 
-exports.sumReducer = (acc, cur) => acc + cur;
+export const sumReducer = (acc, cur) => acc + cur;
 
-exports.roundValue = (number) => Math.max(Math.round(number * 100) / 100, 0);
+export const roundValue = (number) => Math.max(Math.round(number * 100) / 100, 0);
 
-exports.validateArguments = ({ data, width, height }) => {
+export const validateArguments = ({ data, width, height }) => {
   if (!width || typeof width !== 'number' || width < 0) {
     throw new Error('You need to specify the width of your treemap');
   }
