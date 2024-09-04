@@ -8,8 +8,8 @@ import {
 } from './helpers/index.js';
 
 export function getTreemap({ data, width, height }) {
-  let Rectangle = {};
-  let initialData = [];
+  let Rectangle: any = {};
+  let initialData: any = [];
 
   function worstRatio(row, width) {
     const sum = row.reduce(sumReducer, 0);
